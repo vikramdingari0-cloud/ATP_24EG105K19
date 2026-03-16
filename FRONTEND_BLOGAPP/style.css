@@ -1,0 +1,47 @@
+body {
+  height: 2000px;
+  margin: 0;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+.sticky-element {
+  position: sticky;
+  top: 0;
+  background-color: #333;
+  color: white;
+  padding: 15px;
+  z-index: 100;
+}
+
+.relative-element {
+  position: relative;
+  top: 50px;
+  left: 50px;
+  background-color: #007bff;
+  color: white;
+  padding: 20px;
+  width: 250px;
+}
+
+.whatsapp-fixed {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  z-index: 1000;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  background-color: #25D366;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  text-decoration: none;
+}
+
+.whatsapp-fixed img {
+  width: 35px;
+  height: 35px;
+}
