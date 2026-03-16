@@ -1,0 +1,23 @@
+### Register User
+POST http://localhost:5000/common-api/users
+Content-Type: application/json
+
+{
+  "firstName": "author1",
+  "lastName": "12",
+  "email": "author1@gmail.com",
+  "password": "123654",
+  "role": "AUTHOR",
+  "profileImageUrl": ""
+}
+###LOGIN
+POST http://localhost:5000/common-api/login
+Content-Type: application/json
+
+{
+  "email": "author1@gmail.com",
+  "password": "123654"
+}
+
+###User Logout
+GET http://localhost:5000/common-api/logout
