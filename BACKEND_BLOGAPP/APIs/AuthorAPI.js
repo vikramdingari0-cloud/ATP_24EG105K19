@@ -1,81 +1,84 @@
-import exp from "express"
+import express from "express"
 import { ArticleModel } from "../models/ArticleModel.js"
 import { UserModel } from "../models/UserModel.js"
 import { verifyToken } from "../middlewares/VerifyToken.js"
+import { authorizeRoles } from "../middlewares/authorizeRoles.js"
 
-export const authorApp = exp.Router()
+export const authorApp = express.Router()
 
-// write article
-authorApp.post("/article", verifyToken, async (req,res)=>{
+// CREATE
+authorApp.post("/article", verifyToken, authorizeRoles("AUTHOR"), async (req,res)=>{
+  try {
+    const author = await UserModel.findOne({email:req.user.email})
 
-    if(req.user.role !== "AUTHOR"){
-        return res.status(403).json({message:"Only Author can publish."})
-    }
+    const article = new ArticleModel({
+      ...req.body,
+      author: author._id
+    })
 
-    const articleObj = req.body
+    await article.save()
+
+    res.status(201).json({message:"Article created"})
+  } catch(err){
+    res.status(500).json({message:err.message})
+  }
+})
+
+// READ
+authorApp.get("/article", verifyToken, authorizeRoles("AUTHOR"), async (req,res)=>{
+  try {
+    const author = await UserModel.findOne({email:req.user.email})
+
+    const articles = await ArticleModel
+      .find({ author: author._id, isArticleActive: true })
+      .populate("author","firstName email")
+
+    res.json({payload:articles})
+  } catch(err){
+    res.status(500).json({message:err.message})
+  }
+})
+
+// UPDATE
+authorApp.put("/article", verifyToken, authorizeRoles("AUTHOR"), async (req,res)=>{
+  try {
+    const { articleId, ...data } = req.body
 
     const author = await UserModel.findOne({email:req.user.email})
 
-    if(!author){
-        return res.status(404).json({message:"Author not found"})
+    const updated = await ArticleModel.findOneAndUpdate(
+      { articleId, author: author._id },
+      data,
+      { new: true }
+    )
+
+    if(!updated){
+      return res.status(404).json({message:"Article not found"})
     }
 
-    articleObj.author = author._id
+    res.json({message:"Updated", payload:updated})
 
-    const articleDoc = new ArticleModel(articleObj)
-
-    await articleDoc.save()
-
-    res.status(201).json({message:"Article published successfully"})
+  } catch(err){
+    res.status(500).json({message:err.message})
+  }
 })
 
-
-// read own articles
-authorApp.get("/article", verifyToken, async (req,res)=>{
-    try{
-        if(req.user.role !== "AUTHOR"){
-            return res.status(403).json({message:"Only Author can view this"})
-        }
-        // find logged-in author
-        const author = await UserModel.findOne({ email: req.user.email })
-        if(!author){
-            return res.status(404).json({message:"Author not found"})
-        }
-        // fetch articles created by this author
-        const articles = await ArticleModel.find({ author: author._id })
-        res.status(200).json({message: "Author articles fetched",payload: articles})
-    }catch(err){
-        res.status(500).json({ message: "Server error",error: err.message})
-    }
-})
-
-//Update articles by author
-authorApp.put("/article", verifyToken, async (req,res)=>{
-
-    if(req.user.role !== "AUTHOR"){
-        return res.status(403).json({message:"Only Author can update."})
-    }
-
-    const articleObj = req.body
+// DELETE (SOFT DELETE)
+authorApp.patch("/article", verifyToken, authorizeRoles("AUTHOR"), async (req,res)=>{
+  try {
+    const { articleId, isArticleActive } = req.body
 
     const author = await UserModel.findOne({email:req.user.email})
 
-    if(!author){
-        return res.status(404).json({message:"Author not found"})
-    }
+    const updated = await ArticleModel.findOneAndUpdate(
+      { articleId, author: author._id },
+      { isArticleActive },
+      { new: true }
+    )
 
-    articleObj.author = author._id
+    res.json({message:"Status updated", payload:updated})
 
-    const articleDoc = new ArticleModel(articleObj)
-
-    await articleDoc.save()
-
-    res.status(201).json({message:"Article updated successfully"})
+  } catch(err){
+    res.status(500).json({message:err.message})
+  }
 })
-
-// authorApp.patch("/article",async(req,res)=>{
-//     const authorIdOfToken = req.user?._id
-//     const {articleId,isArticleActive} = req.body
-//     const articleOfDB = await ArticleModel.findOne({_id: articleId,author:author})
-//     if(isArticleActive == articleOfDB)
-// })

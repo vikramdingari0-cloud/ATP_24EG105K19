@@ -1,78 +1,75 @@
-import exp from "express"
+import express from "express"
 import { UserModel } from "../models/UserModel.js"
 import { hash, compare } from "bcryptjs"
-import { config } from "dotenv"
 import jwt from "jsonwebtoken"
-const {sign} = jwt
-export const commonApp = exp.Router()
-config()
+import { config } from "dotenv"
 
-// REGISTER USER
+config()
+export const commonApp = express.Router()
+
+// REGISTER
 commonApp.post("/users", async (req,res)=>{
-    const allowedRoles = ["USER","AUTHOR"]
+  try {
     const newUser = req.body
-    // role validation
-    if(!allowedRoles.includes(newUser.role)){
-        return res.status(400).json({message:"Invalid role"})
+
+    if(newUser.password.length < 6){
+      return res.status(400).json({message:"Password too short"})
     }
-    // check if email already exists
+
     const existingUser = await UserModel.findOne({email:newUser.email})
     if(existingUser){
-        return res.status(409).json({message:"User already exists"})
+      return res.status(409).json({message:"User already exists"})
     }
-    // hash password
-    newUser.password = await hash(newUser.password,12)
-    const newUserDoc = new UserModel(newUser)
-    await newUserDoc.save()
-    res.status(201).json({message:"User Created"})
+
+    newUser.password = await hash(newUser.password, 10)
+
+    await new UserModel(newUser).save()
+
+    res.status(201).json({message:"User created"})
+  } catch(err){
+    res.status(500).json({message:err.message})
+  }
 })
 
- 
 // LOGIN
 commonApp.post("/login", async (req,res)=>{
-//get user cred obj
-    const userCred = req.body
-//find user by email
-    const user = await UserModel.findOne({email:userCred.email})
+  try {
+    const { email, password } = req.body
 
+    const user = await UserModel.findOne({ email })
     if(!user){
-        return res.status(404).json({message:"User not found"})
+      return res.status(404).json({message:"User not found"})
     }
 
-    const status = await compare(userCred.password,user.password)
-
+    const status = await compare(password, user.password)
     if(!status){
-        return res.status(401).json({message:"Invalid password"})
+      return res.status(401).json({message:"Invalid password"})
     }
-    //creat jwt
-    const signedToken = sign(
-  { email: user.email, role: user.role },
-  process.env.SECRET_KEY,
-  { expiresIn: "1d" }
-)
-    //set token to cookie header as httpOnly cookie
-    res.cookie("token",signedToken,{
-        httpOnly:true,
-        secure:false,
-        sameSite:"lax"
+
+    const token = jwt.sign(
+      { email: user.email, role: user.role },
+      process.env.SECRET_KEY,
+      { expiresIn: "1d" }
+    )
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax"
     })
-    //remove password from user document
+
     let userObj = user.toObject()
-  delete userObj.password
+    delete userObj.password
 
-  res.status(200).json({
-    message: "login success",
-    payload: userObj
-  })
+    res.json({message:"Login success", payload:userObj})
+
+  } catch(err){
+    res.status(500).json({message:err.message})
+  }
 })
-
 
 // LOGOUT
 commonApp.get("/logout",(req,res)=>{
-    res.clearCookie("token", {
-        httpOnly:true,
-        secure:false,
-        sameSite:"lax"
-    })
-    res.json({message:"User logged out"})
+  res.clearCookie("token")
+  res.json({message:"Logged out"})
 })

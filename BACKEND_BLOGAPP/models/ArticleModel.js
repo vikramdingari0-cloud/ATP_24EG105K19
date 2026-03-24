@@ -1,49 +1,21 @@
-import {Schema,model,Types} from 'mongoose';
+import { Schema, model, Types } from "mongoose"
 
 const commentSchema = new Schema({
-    user:{
-        type:Types.ObjectId,
-        ref: "user",
-        required: [true,"user ID required"]
-    },
-    comment:{
-        type:String
-    },
-});
-
-const ArticleSchema = new Schema({
-    author:{
-        type:Types.ObjectId,
-        ref:"user",
-        required:[true,"Author Id is Required"]
-    },
-    articleId:{
-        type:String,
-        required:[true,"required"]
-
-    },
-    title:{
-        type:String,
-        required:[true,"title Required"]
-    },
-    category:{
-        type:String,
-        required:[true,"category is required"]
-    },
-    content:{
-        type:String,
-        required:[true,"content is required"]
-    },
-    comments:[commentSchema],
-    isArticleActive:{
-        type:Boolean,
-        default:true,
-    }
-},{
-    versionKey:false,
-    timestamps:true,
-    strict:"throw",
+  user: { type: Types.ObjectId, ref: "user", required: true },
+  comment: String
 })
 
-//create article model
-export const ArticleModel = model("article",ArticleSchema);
+const ArticleSchema = new Schema({
+  author: { type: Types.ObjectId, ref: "user", required: true },
+  articleId: { type: String, required: true, unique: true },
+  title: { type: String, required: true },
+  category: { type: String, required: true },
+  content: { type: String, required: true },
+  comments: [commentSchema],
+  isArticleActive: { type: Boolean, default: true }
+},{
+  timestamps: true,
+  versionKey: false
+})
+
+export const ArticleModel = model("article", ArticleSchema)

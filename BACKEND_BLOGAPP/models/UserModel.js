@@ -1,40 +1,20 @@
-import {Schema,model} from 'mongoose'
+import { Schema, model } from "mongoose"
 
 const userSchema = new Schema({
-    firstName:{
-        type:String,
-        required:[true,"first name is required"]
-    },
-    lastName:{
-        type:String
-    },
-    email:{
-        type:String,
-        required:[true,"Email required"],
-        unique:[true,"Email already existed"]
-    },
-    password:{
-        type:String,
-        required:[true,"Password required"]
-    },
-    role:{
-        type:String,
-        enum:["USER","AUTHOR","ADMIN"],
-        required:[true,"Invalid role"]
-    },
-    profileImageUrl:{
-        type:String
-    },
-    isUserActive:{
-        type:Boolean,
-        default:true
-    }
+  firstName: { type: String, required: true },
+  lastName: String,
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  role: {
+    type: String,
+    enum: ["USER", "AUTHOR", "ADMIN"],
+    required: true
+  },
+  profileImageUrl: String,
+  isUserActive: { type: Boolean, default: true }
 },{
-    timestamps:true,
-    versionKey:false,
-    strict:"throw"  
-});
+  timestamps: true,
+  versionKey: false
+})
 
-
-//create model
-export const UserModel = model("user",userSchema)
+export const UserModel = model("user", userSchema)
