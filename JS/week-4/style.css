@@ -1,0 +1,36 @@
+body {
+            font-family: Arial;
+            background-color: #f5f5f5;
+        }
+
+        .box {
+            width: 700px;
+            background: white;
+            margin: 30px auto;
+            padding: 15px;
+            border: 1px solid gray;
+        }
+
+        img {
+            float: right;
+            width: 200px;
+            margin-left: 15px;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+        }
+
+        h3 {
+            margin-top: 15px;
+        }
+
+        a {
+            color: blue;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: gray;
+        }
