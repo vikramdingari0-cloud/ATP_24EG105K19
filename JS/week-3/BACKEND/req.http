@@ -1,0 +1,134 @@
+### GET => don't support body
+### Read all Users
+GET http://localhost:3000/user-api/users
+
+### Read a user by id
+GET http://localhost:3000/user-api/users
+
+
+### POST => it need to be send data to the api body of the request object (send data through end point)
+POST http://localhost:3000/user-api/users
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "akthar",
+  "age": 21
+}
+
+### PUT=> it need to be send data to the api body of the request object
+PUT http://localhost:3000/user-api/users
+Content-Type: application/json
+
+{
+    "id":3,
+    "name" : "tarak",
+    "age" : 21
+}
+### DELETE => don't support body
+DELETE http://localhost:3000/user-api/users/1
+
+
+
+//products
+###
+GET http://localhost:3000/product-api/product/brand
+
+### Read a user by id
+GET http://localhost:3000/product-api/product
+
+
+### POST => it need to be send data to the api body of the request object (send data through end point)
+POST http://localhost:3000/product-api/product
+Content-Type: application/json
+
+{
+  "productId": 1,
+  "name": "mobile",
+  "brand": "Apple",
+  "price": 82000
+}
+
+### PUT=> it need to be send data to the api body of the request object
+PUT http://localhost:3000/product-api/product/1
+Content-Type: application/json
+
+{
+    "productId":1,
+    "name" : "Laptop",
+    "brand" : "Victus",
+    "price": 65000
+}
+### DELETE => don't support body
+DELETE http://localhost:3000/product-api/product/1
+
+### Read all users
+# GET http://localhost:3000/user-api/users
+
+
+# ### Read user by ID
+# GET http://localhost:3000/user-api/users/1
+
+
+# ### Create new user
+# POST http://localhost:3000/user-api/users
+# Content-Type: application/json
+
+# {
+#   "id": 1,
+#   "name": "Akthar",
+#   "age": 21
+# }
+
+
+# ### Update user
+# PUT http://localhost:3000/user-api/users/1
+# Content-Type: application/json
+
+# {
+#   "name": "Tarak",
+#   "age": 22
+# }
+
+
+# ### Delete user
+# DELETE http://localhost:3000/user-api/users/1
+
+
+# ### Read all products
+# GET http://localhost:3000/product-api/products
+
+
+# ### Read product by ID
+# GET http://localhost:3000/product-api/products/1
+
+
+# ### Read products by brand
+# GET http://localhost:3000/product-api/products/brand/Apple
+
+
+# ### Create new product
+# POST http://localhost:3000/product-api/products
+# Content-Type: application/json
+
+# {
+#   "productId": 1,
+#   "name": "iPhone 15",
+#   "brand": "Apple",
+#   "price": 82000
+# }
+
+
+# ### Update product
+# PUT http://localhost:3000/product-api/products/1
+# Content-Type: application/json
+
+# {
+#   "name": "MacBook Air",
+#   "brand": "Apple",
+#   "price": 120000
+# }
+
+
+# ### Delete product
+# DELETE http://localhost:3000/product-api/products/1

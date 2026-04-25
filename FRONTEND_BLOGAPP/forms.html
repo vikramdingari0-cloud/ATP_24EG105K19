@@ -1,0 +1,71 @@
+<!---FORM takes the users data
+lable element -> to describe field
+label input select textarea  --->
+<h1>Forms</h1>
+
+<form >
+    
+    <div class="field">
+        <label for="username">Username:</label>
+        <input 
+            type="text" 
+            name="username"
+            id="username"
+            placeholder="Enter Username"
+            autocomplete="off"
+            required
+            minlength="4"
+            maxlength="15"/>
+    </div>
+    <div class="field">
+        <label for="password">Password:</label>
+        <input 
+            type="password" 
+            name="password" 
+            id="password" 
+            placeholder="Enter Password" 
+            required />
+    </div>
+    <div class="field">
+        <p>Skills:</p>
+        <input type="checkbox" name="skills" value="react" id="react">
+        <label for="react">React</label>
+        
+        <input type="checkbox" name="skills" value="angular" id="angular">
+        <label for="angular">Angular</label>
+    </div>
+    <div class="field">
+        <p>Gender:</p>
+        <input type="radio" name="gender" value="male" id="male" required>
+        <label for="male">Male</label>
+        
+        <input type="radio" name="gender" value="female" id="female">
+        <label for="female">Female</label>
+    </div>
+    <div class="field">
+        <label for="state">State:</label>
+        <select name="state" id="state" required>
+            <option value="">--Select your state--</option>
+            <option value="telangana">Telangana</option>
+            <option value="andhra_pradesh">Andhra Pradesh</option>
+            <option value="tamilnadu">Tamil Nadu</option>
+        </select>
+    </div>
+    <div class="field">
+        <label for="feedback">Feedback:</label>
+        <br> <textarea 
+            name="feedback" 
+            id="feedback" 
+            rows="4" 
+            cols="30" 
+            placeholder="Let us know what you think..."
+        ></textarea>
+    </div>
+    <div class="field">
+        <button type="submit">Submit</button>
+    </div>
+</form>
+<!--
+chechbox->multiple selection
+radio->unique selection
+-->

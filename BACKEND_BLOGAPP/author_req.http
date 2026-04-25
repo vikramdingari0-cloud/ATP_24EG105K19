@@ -1,0 +1,36 @@
+###create new Article
+POST http://localhost:5000/author-api/article
+Content-Type: application/json
+
+{
+    "author":"69b3d1a5a5f90a55db52db79",
+    "articleId":"horror1",
+    "title":"Article-2 by Author-1",
+    "category":"horror",
+    "content":"test"
+
+}
+
+###read aarticles
+GET http://localhost:5000/author-api/article
+
+###Update Article by Author
+PUT http://localhost:5000/author-api/article
+Content-Type: application/json
+
+{
+    "articleId":"horror1",
+    "title":"Article-3 by Author-1",
+    "category":"fantasy",
+    "content":"test"
+
+}
+
+###delete
+PATCH http://localhost:5000/author-api/article
+Content-Type: application/json
+
+{
+    "articleId":"horror1",
+    "isArticleActive":true
+}

@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Rashi+Hebrew:wght@100..900&display=swap');
+
+/*universal selector (to reset the default user agent stylesheet.)*/
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+div{
+    border:20px ;
+    margin: 200px;
+    padding:10px;
+    background-color: rgba(255, 136, 0, 0.489);
+    width: 750px ;
+    font-family:"Noto Rashi Hebrew", serif;
+}
+.head1{
+    color: rgb(255, 0, 0);
+}
+h4{
+    color: red;
+}
+h2{
+    text-align: center;
+}
+img{
+    display: block;
+    margin: auto;
+    border-radius: 50px;
+}
