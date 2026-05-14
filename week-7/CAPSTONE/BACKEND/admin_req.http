@@ -1,0 +1,54 @@
+### Admin Login
+POST http://localhost:4000/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@mail.com",
+  "password": "admin"
+}
+
+### Get All Users (Admin Dashboard)
+GET http://localhost:4000/admin/users
+Cookie: token=YOUR_ADMIN_COOKIE
+
+### Block User
+PATCH http://localhost:4000/admin/users/USER_ID/status
+Content-Type: application/json
+Cookie: token=YOUR_ADMIN_COOKIE
+
+{
+  "isUserActive": false
+}
+
+### Unblock User
+PATCH http://localhost:4000/admin/users/USER_ID/status
+Content-Type: application/json
+Cookie: token=YOUR_ADMIN_COOKIE
+
+{
+  "isUserActive": true
+}
+
+### Get All Articles (Admin Feed)
+GET http://localhost:4000/admin/articles?page=1&limit=10
+Cookie: token=YOUR_ADMIN_COOKIE
+
+### Delete Article Permanently
+DELETE http://localhost:4000/admin/articles/ARTICLE_ID
+Cookie: token=YOUR_ADMIN_COOKIE
+
+### Get Platform Stats
+GET http://localhost:4000/admin/stats
+Cookie: token=YOUR_ADMIN_COOKIE
+
+### Try Access Without Token
+GET http://localhost:4000/admin/users
+
+### Try Admin API with USER login token
+GET http://localhost:4000/admin/users
+Cookie: token=USER_COOKIE
+
+### Large dataset pagination test
+GET http://localhost:4000/admin/articles?page=2&limit=5
+Cookie: token=YOUR_ADMIN_COOKIE
+
