@@ -9,7 +9,7 @@ import morgan from "morgan";
 import { userApp } from "./APIs/UserAPI.js";
 import { authorApp } from "./APIs/AuthorAPI.js";
 import { adminApp } from "./APIs/AdminAPI.js";
-import { commonApp } from "./APIs/CommonAPI.js";
+import { commonApp } from "./APIs/commonAPI.js";
 
 dotenv.config();
 
