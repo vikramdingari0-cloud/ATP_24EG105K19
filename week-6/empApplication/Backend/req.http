@@ -1,0 +1,25 @@
+### Create Employee
+POST http://127.0.0.1:4000/api/emp
+Content-Type: application/json
+
+{
+  "name": "emp",
+  "email": "emp1@example.com",
+  "mobile": 910,
+  "designation": "dev",
+  "companyName": "google"
+}
+
+### Get All Employees
+GET http://127.0.0.1:4000/api/emp
+
+### Update Employee
+PUT http://127.0.0.1:4000/api/emp/69ec60b84327e6943d864ab2
+Content-Type: application/json
+
+{
+  "mobile": 1234567890
+}
+
+### Delete Employee
+DELETE http://localhost:4000/api/id

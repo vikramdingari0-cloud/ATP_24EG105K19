@@ -1,0 +1,58 @@
+/* Enhanced Bootstrap Styles */
+body {
+  background-color: #f0f2f5;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+.app-title {
+  margin-top: 40px;
+  margin-bottom: 30px;
+  font-weight: 800;
+  color: #2d3748;
+}
+
+.user-card {
+  border: none;
+  border-radius: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+}
+
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  background-color: #e2e8f0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4a5568;
+}
+
+.btn-add {
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 8px 20px;
+}
+
+.count-banner {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 15px rgba(102, 126, 234, 0.2);
+}
