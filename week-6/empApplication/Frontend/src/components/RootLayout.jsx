@@ -1,7 +1,7 @@
 import Header from './Header'
 import { Outlet } from 'react-router'
 
-function Rootlayout() {
+function RootLayout() {
   return (
     <div className="min-h-screen bg-gray-50">
         <Header />
@@ -12,4 +12,4 @@ function Rootlayout() {
   )
 }
 
-export default Rootlayout
+export default RootLayout

@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Rootlayout from "./components/Rootlayout";
+import RootLayout from "./components/RootLayout";
 import Home from "./components/Home";
 import CreateEmp from "./components/CreateEmp";
 import ListOfEmp from "./components/ListOfEmp";
@@ -10,7 +10,7 @@ function App() {
   const routerObj = createBrowserRouter([
     {
       path: "/",
-      element: <Rootlayout />,
+      element: <RootLayout />,
       children: [
         {
           index: true,
