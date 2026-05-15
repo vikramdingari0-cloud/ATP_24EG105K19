@@ -1,0 +1,93 @@
+/* Assignment 1:
+ Create employees collection and insert 5 emp documents with below structure
+ => Structure
+{
+    empId:"",
+    name:"",
+    skills:[],
+    experiences:[
+        {
+            companyName:"",
+            yearsOfExp:""
+        }
+    ]
+}
+1. Find emps with React skill
+2. Add new skills "Express"
+3. Add new experience 
+4. Delete first experience
+5. Add address to emp whose name is "vikas"
+*/
+
+//Create employees and collection and insert 5 emp documents
+db.employees.insertMany([
+{
+  empId: 1,
+  name: "Vikas",
+  skills: ["Java", "React"],
+  experiences: [
+    { companyName: "Capgemini", yearsOfExp: 2 }
+  ]
+},
+{
+  empId: 2,
+  name: "Rahul",
+  skills: ["Node", "MongoDB"],
+  experiences: [
+    { companyName: "Infosys", yearsOfExp: 3 }
+  ]
+},
+{
+  empId: 3,
+  name: "Anita",
+  skills: ["React", "Angular"],
+  experiences: [
+    { companyName: "Wipro", yearsOfExp: 2 }
+  ]
+},
+{
+  empId: 4,
+  name: "Kiran",
+  skills: ["Java", "SQL"],
+  experiences: [
+    { companyName: "Accenture", yearsOfExp: 4 }
+  ]
+},
+{
+  empId: "E105",
+  name: "Sneha",
+  skills: ["CSS", "HTML"],
+  experiences: [
+    { companyName: "JP Morgan Chase and Co.", yearsOfExp: 1 }
+  ]
+}
+])
+
+//Find emps with React skill
+db.employees.find({skills:"React"})
+
+//Add new skill Express
+db.employees.updateMany({},{$push:{skills:"Express"}})
+
+//Add new experience
+db.employees.updateMany({},
+  {
+    $push: {
+      experiences: {
+        companyName: "ABC Tech.",
+        yearsOfExp: 1
+      }
+    }
+   })
+
+//Delete first experience
+db.employees.updateMany({},{$pop:{experiences:-1}})
+
+//Add address to emp whose name is "vikas"
+db.employees.updateOne({ name: "Vikas" },
+  {
+    $set: {
+      address: "Hyderabad"
+    }
+  }
+)
