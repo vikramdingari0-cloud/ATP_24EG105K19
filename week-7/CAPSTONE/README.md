@@ -1,4 +1,4 @@
-# MERN Blog Application 🚀
+# MERN Blog Application 
 
 ## Overview
 
